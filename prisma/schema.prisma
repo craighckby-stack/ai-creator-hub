@@ -1,0 +1,144 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String   @id @default(cuid())
+  email           String   @unique
+  name            String?
+  company         String?
+  role            String?
+  experienceLevel String?  // 'beginner', 'intermediate', 'expert'
+  consentAccepted Boolean  @default(false)
+  consentVersion  String   @default("1.0")
+  onboardingCompleted Boolean @default(false)
+  githubUsername  String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  title     String
+  content   String?
+  published Boolean  @default(false)
+  authorId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Evolution Engine Models
+
+model SystemConfig {
+  id          String   @id @default(cuid())
+  githubToken String?
+  geminiApiKey String?
+  githubRepo   String?
+  evolutionCycle Int    @default(4)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Placeholder {
+  id            String   @id @default(cuid())
+  externalId    String   @unique
+  name          String
+  description   String?
+  completed     Boolean  @default(false)
+  dependencies  String   // JSON array of dependency IDs
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model SystemLog {
+  id        String   @id @default(cuid())
+  message   String
+  type      String   // 'info', 'error', 'success', 'gemini', 'github'
+  timestamp DateTime @default(now())
+}
+
+model ImplementationResult {
+  id          String   @id @default(cuid())
+  placeholderId String
+  files       String   // JSON array of files
+  timestamp   DateTime @default(now())
+}
+
+model Resource {
+  id          String   @id @default(cuid())
+  name        String
+  status      String   @default("active")
+  progress    Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model GitHubRepository {
+  id              String   @id @default(cuid())
+  userId          String
+  repoName        String
+  repoUrl         String?
+  description     String?
+  isPrivate       Boolean  @default(false)
+  status          String   @default("creating") // 'creating', 'created', 'failed'
+  githubRepoId    String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model ProjectSpecification {
+  id                  String   @id @default(cuid())
+  userId              String
+  projectType         String   // 'quantum-os', 'book-writer', 'custom', etc.
+  projectDescription   String
+  requirements         String   // JSON array of requirements
+  techStack           String?  // JSON array of technologies
+  status              String   @default("analyzing") // 'analyzing', 'generating', 'ready', 'building'
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+}
+
+model UploadedFile {
+  id          String   @id @default(cuid())
+  projectId    String
+  fileName     String
+  fileType     String   // 'bin', 'pdf', 'json', 'zip', etc.
+  fileSize     Int
+  filePath     String
+  description  String?
+  createdAt    DateTime @default(now())
+}
+
+model RelevantRepo {
+  id          String   @id @default(cuid())
+  projectId    String
+  repoName    String
+  repoUrl     String
+  owner       String
+  description String?
+  stars       Int      @default(0)
+  language    String?
+  topics      String?  // JSON array of topics
+  relevanceScore Float    @default(0.0) // AI-calculated relevance
+  createdAt   DateTime @default(now())
+}
+
+model BuildInstructions {
+  id          String   @id @default(cuid())
+  projectId    String
+  content     String   // Markdown formatted instructions
+  phase       String   @default("setup") // 'setup', 'frontend', 'backend', 'integration', 'testing', 'deployment'
+  completed   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
