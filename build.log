@@ -1,0 +1,15 @@
+$ next build && cp -r .next/static .next/standalone/.next/ && cp -r public .next/standalone/
+   ▲ Next.js 15.3.5
+   - Environments: .env
+
+   Creating an optimized production build ...
+Failed to compile.
+
+./src/app/cli/page.tsx
+Module not found: Can't resolve 'socket.io-client'
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+> Build failed because of webpack errors
+error: script "build" exited with code 1
