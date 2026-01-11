@@ -1,0 +1,48 @@
+$ next build && cp -r .next/static .next/standalone/.next/ && cp -r public .next/standalone/
+   ▲ Next.js 15.3.5
+   - Environments: .env
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 7.0s
+   Skipping validation of types
+   Skipping linting
+   Collecting page data ...
+   Generating static pages (0/21) ...
+   Generating static pages (5/21) 
+   Generating static pages (10/21) 
+   Generating static pages (15/21) 
+ ✓ Generating static pages (21/21)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                        Size  First Load JS
+┌ ○ /                                           9.31 kB         120 kB
+├ ○ /_not-found                                   978 B         102 kB
+├ ƒ /api                                          176 B         101 kB
+├ ƒ /api/deploy                                   176 B         101 kB
+├ ƒ /api/evolution/config                         176 B         101 kB
+├ ƒ /api/evolution/generate                       176 B         101 kB
+├ ƒ /api/evolution/logs                           176 B         101 kB
+├ ƒ /api/evolution/placeholders                   176 B         101 kB
+├ ƒ /api/evolution/placeholders/[id]              176 B         101 kB
+├ ƒ /api/evolution/placeholders/[id]/implement    176 B         101 kB
+├ ƒ /api/generate-agi-build                       176 B         101 kB
+├ ƒ /api/generate-build-instructions              176 B         101 kB
+├ ƒ /api/github/search-repos                      176 B         101 kB
+├ ƒ /api/onboarding/complete                      176 B         101 kB
+├ ƒ /api/onboarding/status                        176 B         101 kB
+├ ƒ /api/project/start-build                      176 B         101 kB
+├ ƒ /api/scraped-repos                            176 B         101 kB
+├ ƒ /api/search/agi-concepts                      176 B         101 kB
+├ ƒ /api/system/reset                             176 B         101 kB
+├ ○ /cli                                        2.64 kB         104 kB
+└ ○ /project-spec                               8.41 kB         119 kB
++ First Load JS shared by all                    101 kB
+  ├ chunks/4bd1b696-a4b9de495e836315.js         53.2 kB
+  ├ chunks/684-b44b51470de76a9c.js                46 kB
+  └ other shared chunks (total)                 1.93 kB
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
