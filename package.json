@@ -1,6 +1,6 @@
 {
   "name": "nextjs_tailwind_shadcn_ts",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev -p 3000 2>&1 | tee dev.log",
@@ -10,7 +10,12 @@
     "db:push": "prisma db push",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
-    "db:reset": "prisma migrate reset"
+    "db:reset": "prisma migrate reset",
+    "deploy": "bun run deplay.ts",
+    "cli": "cd mini-services/cli-service && bun run dev &",
+    "scraper": "cd mini-services/repo-scraper && bun run dev &",
+    "vector-db": "cd mini-services/vector-db && bun run dev &",
+    "test:deploy": "bun run build"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
@@ -46,6 +51,8 @@
     "@radix-ui/react-toggle": "^1.1.9",
     "@radix-ui/react-toggle-group": "^1.1.10",
     "@radix-ui/react-tooltip": "^1.2.7",
+    "@radix-ui/react-toggle-group": "^1.1.10",
+    "@radix-ui/react-tooltip": "^1.2.7",
     "@reactuses/core": "^6.0.5",
     "@tanstack/react-query": "^5.82.0",
     "@tanstack/react-table": "^8.21.3",
@@ -78,7 +85,9 @@
     "vaul": "^1.1.2",
     "z-ai-web-dev-sdk": "^0.0.15",
     "zod": "^4.0.2",
-    "zustand": "^5.0.6"
+    "zustand": "^5.0.6",
+    "octokit": "^4.0.2",
+    "openai": "^4.20.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

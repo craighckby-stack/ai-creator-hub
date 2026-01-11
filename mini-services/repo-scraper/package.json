@@ -1,0 +1,13 @@
+{
+  "name": "repo-scraper",
+  "version": "3.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "bun --hot index.ts",
+    "start": "bun index.ts"
+  },
+  "dependencies": {
+    "socket.io": "^4.7.5",
+    "octokit": "^4.0.2"
+  }
+}

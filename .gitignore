@@ -46,4 +46,7 @@ dev.log
 test
 prompt
 
-server.log
+server.logdb/custom.db
+*.db
+*.db-shm
+*.db-wal

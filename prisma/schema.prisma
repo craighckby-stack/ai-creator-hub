@@ -142,3 +142,57 @@ model BuildInstructions {
   completed   Boolean  @default(false)
   createdAt   DateTime @default(now())
 }
+
+// Scraped Repository Data Models
+model ScrapedRepository {
+  id              String   @id @default(cuid())
+  full_name       String   @unique
+  name            String
+  description     String?
+  language        String?
+  stars           Int      @default(0)
+  forks           Int      @default(0)
+  url             String
+  owner           String
+  readme          String?  // Using String for SQLite
+  file_count      Int      @default(0)
+  commit_count    Int      @default(0)
+  issue_count     Int      @default(0)
+  branch_count    Int      @default(0)
+  scraped_at      DateTime @default(now())
+  is_processed    Boolean  @default(false) // Has been processed for RAG
+}
+
+model ScrapedFile {
+  id          String   @id @default(cuid())
+  repo_id     String   // Reference to ScrapedRepository
+  name        String
+  path        String?
+  size        Int
+  type        String   // 'code', 'documentation', 'config', 'readme'
+  language    String?
+  content     String?  // Using String for SQLite
+  scraped_at  DateTime @default(now())
+  is_embedded Boolean  @default(false) // Has been vectorized
+}
+
+model ScrapedCommit {
+  id          String   @id @default(cuid())
+  repo_id     String   // Reference to ScrapedRepository
+  sha         String
+  message     String
+  date        String?
+  author      String
+  scraped_at  DateTime @default(now())
+}
+
+model ScrapedIssue {
+  id          String   @id @default(cuid())
+  repo_id     String   // Reference to ScrapedRepository
+  number      Int
+  title       String
+  body        String?
+  labels      String   // JSON array of label names
+  created_at  DateTime
+  scraped_at  DateTime @default(now())
+}
